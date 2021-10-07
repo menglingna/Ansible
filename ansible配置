@@ -1,0 +1,21 @@
+#1、ansile配置
+修改/etc/ansible/hosts文件。如下图所示，配置主机ssh地址、root用户名/密码和主机分组。
+vi /etc/ansible/hosts
+注意：这里的密码要和root用户的登陆密码保持一致
+配置内容如下：
+promtail01 ansible_ssh_host=10.2.0.1
+promtail02 ansible_ssh_host=10.2.0.2
+promtail03 ansible_ssh_host=10.2.0.3
+promtail04 ansible_ssh_host=10.2.0.4
+promtail05 ansible_ssh_host=10.2.0.5
+
+[all:vars]
+ansible_ssh_user=root
+ansible_ssh_pass=menglingna123!@#
+
+2、修改ansible的配置
+sed -i 's/#host_key_checking = False/host_key_checking = False/g' /etc/ansible/ansible.cfg
+
+3、测试输出所有的主机名
+ansible all -a "hostname"
+
